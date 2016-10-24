@@ -16,7 +16,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         get; set;
     }
 
-    public bool CanBePlayed () {
+    public virtual bool CanBePlayed () {
         return true;
     }
 
@@ -24,11 +24,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     }
 
-    public void CreateGameobject() {
+    public virtual void CreateGameobject() {
 
     }
 
-    public void OnPlay() {
+    public virtual void OnPlay() {
 
     }
 
