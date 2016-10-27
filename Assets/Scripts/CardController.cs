@@ -6,8 +6,9 @@ public abstract class CardController : ScriptableObject {
 
     public abstract bool CanBePlayed();
 
-    public void CreateGameobject() {
+    public void CreateGameobject(Transform parent) {
         CardView i = GameObject.Instantiate(Resources.Load<CardView>("Card"));
+        i.transform.SetParent(parent);
         i.controller = this;
     }
 

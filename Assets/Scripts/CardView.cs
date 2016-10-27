@@ -9,8 +9,7 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public CardController controller;
 
     public void Awake() {
-        image = GetComponent<Image>();
-        GetImage = cardBack;
+
     }
 
     public bool IsDraggable {
