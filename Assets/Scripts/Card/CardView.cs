@@ -39,6 +39,7 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void ReturnCard() {
         transform.SetParent(previousParent);
+        transform.SetSiblingIndex(siblingIndex);
     }
 
     public virtual void OnPlay() {
@@ -52,6 +53,8 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
 
     Transform previousParent;
+    GameObject placeholder;
+    int siblingIndex;
 
     public void OnBeginDrag(PointerEventData eventData) {
         GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -59,14 +62,21 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if(IsDraggable) {
             IsBeingDragged = true;
             previousParent = transform.parent;
+            siblingIndex = transform.GetSiblingIndex();
+
+            placeholder = (GameObject)Instantiate(Resources.Load("Placeholder"));
+            placeholder.transform.SetParent(previousParent);
+            
+            placeholder.transform.SetSiblingIndex(siblingIndex);
+
             transform.SetParent(transform.parent.parent);
         }
     }
 
     public void OnEndDrag(PointerEventData eventData) {
         GetComponent<CanvasGroup>().blocksRaycasts = true;
-
         if(IsDraggable) {
+            Destroy(placeholder);
             RaycastResult rr = eventData.pointerCurrentRaycast;
             if(rr.gameObject.tag == "CurrentCard") {
                 CurrentCard.setCurrentCard(gameObject);
