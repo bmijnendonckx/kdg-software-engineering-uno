@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 public class Pile : MonoBehaviour {
     public List<CardController> pile = new List<CardController>();
+    public static List<CardController> stock = new List<CardController>();
     private System.Random r;
-    private static Transform t;
 
     public void Awake() {
         r = new System.Random();
-        t = transform;
         Shuffle();
     }
 
@@ -28,7 +27,7 @@ public class Pile : MonoBehaviour {
 
     public void PullCard() {
         //Card 0 is the top card of the pile
-        GameManager.CurrentPlayer.hand.Add(pile[0].CreateGameobject(t));
+        GameManager.CurrentPlayer.hand.Add(pile[0].CreateGameobject());
         pile.RemoveAt(0); //remove from pile add to hand from the currently playing player
     }
 
@@ -37,25 +36,5 @@ public class Pile : MonoBehaviour {
         for(int i = 0; i < cards; i++) {
             PullCard();
         }
-    }
-
-    public GameObject CurrentCard
-    {
-        get; set;
-    }
-
-    public string Color
-    {
-        get; set;
-    }
-
-    public string Value
-    {
-        get; set;
-    }
-
-    public void stripComponent()
-    {
-
     }
 }

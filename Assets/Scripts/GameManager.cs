@@ -4,7 +4,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
     static Player[] players = new Player[2];
     static int playerIndex = 0;
-    private Pile pile;
+    Pile pile;
 
     public static int PlayerIndex {
         get {return playerIndex;}
@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Awake() {
+        pile = GameObject.FindGameObjectWithTag("Pile").GetComponent<Pile>();
+        
         for(int i = 0; i < players.Length; i++) {
             players[i] = new Player();
         }
