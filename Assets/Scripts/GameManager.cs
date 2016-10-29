@@ -54,4 +54,18 @@ public class GameManager : MonoBehaviour {
         //set next turn
         //Turn();
     }
-}
+    public void ToggleNextPlayer()
+    {
+        GameObject[] cardsOnField = GameObject.FindGameObjectsWithTag("cards");
+        for (int i = 0; i < cardsOnField.Length; i++)
+        {
+            Destroy(cardsOnField[i]);
+        }
+        playerIndex++;
+        for (int i = 0; i < players[playerIndex].hand.Count; i++)
+        {
+            players[playerIndex].hand[i].controller.CreateGameobject();
+        } 
+    }
+
+    }
