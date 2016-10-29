@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
         //set next turn
         //Turn();
     }
-    public static void ToggleNextPlayer()
+    public void ToggleNextPlayer()
     {
         GameObject[] cardsOnField = GameObject.FindGameObjectsWithTag("Card");
         for (int i = 0; i < cardsOnField.Length; i++)
@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour {
         }
         playerIndex++;
         playerIndex = (playerIndex + players.Length) % players.Length;
+        BeginTurn();
         Debug.Log(players[playerIndex].hand.Count);
         for (int i = 0; i < players[playerIndex].hand.Count; i++)
         {
