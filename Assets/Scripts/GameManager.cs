@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour {
         Debug.Log(players[playerIndex].hand.Count);
         for (int i = 0; i < players[playerIndex].hand.Count; i++)
         {
-            Debug.Log(players[playerIndex].hand[i].controller.model.color);
+            //Debug.Log(players[playerIndex].hand[i].controller.model.color);
             players[playerIndex].hand[i].controller.CreateGameobject();
         }
         Debug.Log(playerIndex);
