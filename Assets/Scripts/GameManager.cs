@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour {
             Destroy(cardsOnField[i]);
         }
         playerIndex++;
+        playerIndex = (playerIndex + players.Length) % players.Length;
         Debug.Log(players[playerIndex].hand.Count);
         for (int i = 0; i < players[playerIndex].hand.Count; i++)
         {
