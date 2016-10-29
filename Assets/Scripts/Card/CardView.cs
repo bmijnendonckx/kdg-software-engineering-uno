@@ -82,6 +82,7 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 CurrentCard.setCurrentCard(gameObject);
                 rr.gameObject.GetComponent<CurrentCard>().onChangeCard();
                 Debug.Log(CurrentCard.currentCard());
+                GameManager.ToggleNextPlayer();
             } else
             ReturnCard();
         }
