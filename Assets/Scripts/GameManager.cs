@@ -46,31 +46,32 @@ public class GameManager : MonoBehaviour {
             pile.PullCard(7);
             CurrentPlayer.isFirstTurn = false;
         }
+        else
+        {
+            for (int i = 0; i < CurrentPlayer.hand.Count; i++)
+            {
+                Debug.Log(players[playerIndex].hand[i].controller.model.color);
+                players[playerIndex].hand[i].controller.CreateGameobject();
+            }
+        }
         //set hand visible
     }
 
     public void EndTurn() {
-        //save hand
-        //set next turn
-        //Turn();
-    }
-    public void ToggleNextPlayer()
-    {
         GameObject[] cardsOnField = GameObject.FindGameObjectsWithTag("Card");
         for (int i = 0; i < cardsOnField.Length; i++)
         {
             Destroy(cardsOnField[i]);
         }
-        playerIndex++;
+        ToggleNextPlayer();
+    }
+    public void ToggleNextPlayer()
+    {
+        
+        playerIndex += 1;
+        Debug.Log(playerIndex);
         playerIndex = (playerIndex + players.Length) % players.Length;
         BeginTurn();
-        Debug.Log(players[playerIndex].hand.Count);
-        for (int i = 0; i < players[playerIndex].hand.Count; i++)
-        {
-            //Debug.Log(players[playerIndex].hand[i].controller.model.color);
-            players[playerIndex].hand[i].controller.CreateGameobject();
-        }
-        Debug.Log(playerIndex);
     }
 
     }
