@@ -65,10 +65,9 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             siblingIndex = transform.GetSiblingIndex();
 
             placeholder = (GameObject)Instantiate(Resources.Load("Placeholder"));
-            placeholder.transform.SetParent(previousParent);
-            
-            placeholder.transform.SetSiblingIndex(siblingIndex);
 
+            placeholder.transform.SetParent(previousParent);
+            placeholder.transform.SetSiblingIndex(siblingIndex);
             transform.SetParent(transform.parent.parent);
         }
     }
@@ -80,10 +79,8 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             RaycastResult rr = eventData.pointerCurrentRaycast;
             if(rr.gameObject.tag == "CurrentCard") {
                 CurrentCard.setCurrentCard(gameObject);
-                rr.gameObject.GetComponent<CurrentCard>().onChangeCard();
-                Debug.Log(CurrentCard.currentCard());
+                //Debug.Log(CurrentCard.currentCard());
                 GameObject.FindGameObjectWithTag("screen").GetComponent<GameManager>().EndTurn();
-                
             } else
             ReturnCard();
         }

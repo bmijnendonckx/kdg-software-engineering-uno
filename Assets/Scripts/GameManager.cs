@@ -67,11 +67,7 @@ public class GameManager : MonoBehaviour {
     }
     public void ToggleNextPlayer()
     {
-        
-        playerIndex += 1;
-        Debug.Log(playerIndex);
-        playerIndex = (playerIndex + players.Length) % players.Length;
+        PlayerIndex++;
         BeginTurn();
     }
-
-    }
+}

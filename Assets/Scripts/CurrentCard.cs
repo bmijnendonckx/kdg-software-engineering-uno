@@ -4,9 +4,14 @@ using UnityEngine.UI;
 
 public class CurrentCard:MonoBehaviour {
     public static CardModel m = new CardModel();
+    private static CurrentCard instance;
 
     public void onChangeCard() {
         GetComponent<Image>().sprite = CardFace;
+    }
+
+    public void Awake() {
+        instance = this;
     }
 
     public static Sprite CardFace {
@@ -48,6 +53,7 @@ public class CurrentCard:MonoBehaviour {
         GameManager.CurrentPlayer.hand.Remove(view);
         Pile.stock.Add(controller);
         Destroy(go);
+        instance.onChangeCard();
     }
 
     public static string currentCard() {
