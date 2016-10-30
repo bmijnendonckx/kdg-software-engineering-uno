@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour {
 
         for (int i = 0; i < CurrentPlayer.hand.Count; i++)
         {
-            Debug.Log(players[playerIndex].hand[i].controller.model.color);
+            //Debug.Log(players[playerIndex].hand[i].controller.model.color);
             CurrentPlayer.hand[i].controller.CreateGameobject();
         }
     }

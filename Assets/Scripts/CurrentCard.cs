@@ -5,9 +5,26 @@ using UnityEngine.UI;
 public class CurrentCard:MonoBehaviour {
     public static CardModel m = new CardModel();
     private static CurrentCard instance;
+    public Color red, yellow, blue, green;
+
+    public Color getColor (string c) {
+        switch(c) {
+            case "red":
+                return red;
+            case "yellow":
+                return yellow;
+            case "blue":
+                return blue;
+            case "green":
+                return green;
+            default:
+                return new Color(0, 0, 0);
+        }
+    }
 
     public void onChangeCard() {
         GetComponent<Image>().sprite = CardFace;
+        GameObject.FindGameObjectWithTag("Background").GetComponent<Image>().color = getColor(Color);
     }
 
     public void Awake() {

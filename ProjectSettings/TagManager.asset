@@ -9,6 +9,7 @@ TagManager:
   - CardHolder
   - Card
   - screen
+  - Background
   layers:
   - Default
   - TransparentFX
