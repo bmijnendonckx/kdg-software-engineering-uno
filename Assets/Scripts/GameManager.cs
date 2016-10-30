@@ -46,15 +46,12 @@ public class GameManager : MonoBehaviour {
             pile.PullCard(7);
             CurrentPlayer.isFirstTurn = false;
         }
-        else
+
+        for (int i = 0; i < CurrentPlayer.hand.Count; i++)
         {
-            for (int i = 0; i < CurrentPlayer.hand.Count; i++)
-            {
-                Debug.Log(players[playerIndex].hand[i].controller.model.color);
-                players[playerIndex].hand[i].controller.CreateGameobject();
-            }
+            Debug.Log(players[playerIndex].hand[i].controller.model.color);
+            CurrentPlayer.hand[i].controller.CreateGameobject();
         }
-        //set hand visible
     }
 
     public void EndTurn() {
