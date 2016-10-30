@@ -82,6 +82,8 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 CurrentCard.setCurrentCard(gameObject);
                 rr.gameObject.GetComponent<CurrentCard>().onChangeCard();
                 Debug.Log(CurrentCard.currentCard());
+                GameObject.FindGameObjectWithTag("screen").GetComponent<GameManager>().EndTurn();
+                
             } else
             ReturnCard();
         }
