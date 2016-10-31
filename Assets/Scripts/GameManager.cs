@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
     static Player[] players = new Player[2];
     static int playerIndex = 0;
-    Pile pile;
 
     public static int PlayerIndex {
         get {return playerIndex;}
@@ -19,9 +18,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void Awake() {
-        pile = GameObject.FindGameObjectWithTag("Pile").GetComponent<Pile>();
-        
+    public void Awake() {        
         for(int i = 0; i < players.Length; i++) {
             players[i] = new Player();
         }
