@@ -45,21 +45,11 @@ public class GameManager : MonoBehaviour {
         if(CurrentPlayer.isFirstTurn) {
             Pile.PullCard(7);
             CurrentPlayer.isFirstTurn = false;
-        } else {       
-            for (int i = 0; i < CurrentPlayer.hand.Count; i++)
-            {
-                //Debug.Log(players[playerIndex].hand[i].controller.model.color);
-                CurrentPlayer.hand[i].controller.CreateGameobject();
-            }
         }
     }
 
     public void EndTurn() {
-        GameObject[] cardsOnField = GameObject.FindGameObjectsWithTag("Card");
-        for (int i = 0; i < cardsOnField.Length; i++)
-        {
-            Destroy(cardsOnField[i]);
-        }
+        
         ToggleNextPlayer();
     }
     public void ToggleNextPlayer()
