@@ -85,7 +85,7 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             RaycastResult rr = eventData.pointerCurrentRaycast;
             if(rr.gameObject.tag == "CurrentCard") {
                 CurrentCard.setCurrentCard(gameObject);
-                //Debug.Log(CurrentCard.currentCard());
+                //After a card was played end the turn
                 GameManager.EndTurn();
             } else
             ReturnCard();

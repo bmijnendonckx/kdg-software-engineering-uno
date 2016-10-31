@@ -25,8 +25,15 @@ public class GameManager : MonoBehaviour {
         for(int i = 0; i < players.Length; i++) {
             players[i] = new Player();
         }
+
+        GameObject.FindGameObjectWithTag("CardHolder").GetComponent<Button>().onClick.AddListener(onPileClick);
+
         //Start game
         StartGame();
+    }
+
+    public void onPileClick() {
+        Pile.PullCard();
     }
 
     public static void StartGame() {
@@ -42,6 +49,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public static void BeginTurn() {
+        //Set current hand as scrollable
+        Pile.instance.GetComponent<ScrollRect>().content = CurrentPlayer.HandGameObject.GetComponent<RectTransform>();
         //Set current player in textbar
         GameObject.FindGameObjectWithTag("PlayerTextBar").GetComponentInChildren<Text>().text = "PLAYER " + (PlayerIndex + 1) + "'S TURN";
         //if this is the first turn for you as a player take 7 cards
