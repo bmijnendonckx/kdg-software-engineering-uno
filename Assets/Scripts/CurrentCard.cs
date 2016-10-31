@@ -29,6 +29,7 @@ public class CurrentCard:MonoBehaviour {
 
     public void Awake() {
         instance = this;
+        setCurrentCard(Pile.instance.pile[0].CreateGameobject().gameObject);
     }
 
     public static Sprite CardFace {
