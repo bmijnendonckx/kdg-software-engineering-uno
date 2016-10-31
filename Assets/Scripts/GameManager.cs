@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
     public void BeginTurn() {
         //if this is the first turn for you as a player take 7 cards
         if(CurrentPlayer.isFirstTurn) {
-            pile.PullCard(7);
+            Pile.PullCard(7);
             CurrentPlayer.isFirstTurn = false;
         }
 

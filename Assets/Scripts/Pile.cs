@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class Pile : MonoBehaviour {
     public List<CardController> pile = new List<CardController>();
     public static List<CardController> stock = new List<CardController>();
+    public static Pile instance;
     private System.Random r;
 
     public void Awake() {
+        instance = this;
         r = new System.Random();
         Shuffle();
     }
@@ -25,14 +27,14 @@ public class Pile : MonoBehaviour {
         }
     }
 
-    public void PullCard() {
+    public static void PullCard() {
         //Card 0 is the top card of the pile
-        GameManager.CurrentPlayer.hand.Add(pile[0].CreateGameobject());
-        pile.RemoveAt(0); //remove from pile add to hand from the currently playing player
+        GameManager.CurrentPlayer.hand.Add(instance.pile[0].CreateGameobject());
+        instance.pile.RemoveAt(0); //remove from pile add to hand from the currently playing player
     }
 
     //Pull Cards equal to passed amount
-    public void PullCard(int cards) {
+    public static void PullCard(int cards) {
         for(int i = 0; i < cards; i++) {
             PullCard();
         }
