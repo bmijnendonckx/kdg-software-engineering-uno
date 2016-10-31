@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     static Player[] players = new Player[2];
@@ -41,16 +42,18 @@ public class GameManager : MonoBehaviour {
     }
 
     public void BeginTurn() {
+        //Set current player in textbar
+        GameObject.FindGameObjectWithTag("PlayerTextBar").GetComponentInChildren<Text>().text = "PLAYER " + (PlayerIndex + 1);
         //if this is the first turn for you as a player take 7 cards
         if(CurrentPlayer.isFirstTurn) {
             Pile.PullCard(7);
             CurrentPlayer.isFirstTurn = false;
-        }
-
-        for (int i = 0; i < CurrentPlayer.hand.Count; i++)
-        {
-            //Debug.Log(players[playerIndex].hand[i].controller.model.color);
-            CurrentPlayer.hand[i].controller.CreateGameobject();
+        } else {       
+            for (int i = 0; i < CurrentPlayer.hand.Count; i++)
+            {
+                //Debug.Log(players[playerIndex].hand[i].controller.model.color);
+                CurrentPlayer.hand[i].controller.CreateGameobject();
+            }
         }
     }
 
