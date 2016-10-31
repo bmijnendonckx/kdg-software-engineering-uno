@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
     static Player[] players = new Player[2];
     static int playerIndex = 0;
-    GameObject continueUI;
+    static GameObject continueUI;
+    static GameManager instance;
 
     public static int PlayerIndex {
         get {return playerIndex;}
@@ -19,7 +20,8 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void Awake() {        
+    public void Awake() {
+        instance = this;     
         for(int i = 0; i < players.Length; i++) {
             players[i] = new Player();
         }
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour {
         StartGame();
     }
 
-    public void StartGame() {
+    public static void StartGame() {
         //First player
         PlayerIndex = 0;
 
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour {
         BeginTurn();
     }
 
-    public void BeginTurn() {
+    public static void BeginTurn() {
         //Set current player in textbar
         GameObject.FindGameObjectWithTag("PlayerTextBar").GetComponentInChildren<Text>().text = "PLAYER " + (PlayerIndex + 1) + "'S TURN";
         //if this is the first turn for you as a player take 7 cards
@@ -49,39 +51,25 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void createContinueUI() {
-        continueUI = new GameObject("Press Continue");
-        continueUI.transform.SetParent(transform);
+    public static void createContinueUI() {
+        continueUI = Resources.Load<GameObject>("Press Continue");
+        continueUI = Instantiate<GameObject>(continueUI);
+        continueUI.transform.SetParent(Pile.instance.transform);
         continueUI.transform.SetAsLastSibling();
-
-        Image image = continueUI.AddComponent<Image>();
-        image.color = new Color(0, 0, 0);
-
-        RectTransform rt = image.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(Screen.width / 2, Screen.height / 4);
-        rt.localPosition = Vector3.zero;
-
-        GameObject t = new GameObject("Text");
-        t.transform.SetParent(continueUI.transform);
-
-        Text text = t.AddComponent<Text>();
-        text.font = Resources.Load<Font>("Fonts/Montserrat-Regular");
-        text.fontSize = 50;
-        text.alignment = TextAnchor.MiddleCenter;
-        text.text = "PLAYER " + (PlayerIndex+1);
-
-        RectTransform rt2 = t.GetComponent<RectTransform>();
-        rt2.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y/2);
-        t.transform.localPosition = new Vector3(0, rt2.sizeDelta.y / 2, 0);
+        continueUI.transform.localPosition = new Vector3(0, 300, 0);
+        continueUI.GetComponentInChildren<Button>().onClick.AddListener(OnContinueUIClick);
     }
 
-    public void EndTurn() {
+    public static void EndTurn() {
         createContinueUI();
+    }
 
+    public static void OnContinueUIClick() {
+        Destroy(continueUI);
         ToggleNextPlayer();
     }
-    public void ToggleNextPlayer()
-    {
+
+    public static void ToggleNextPlayer() {
         PlayerIndex++;
         BeginTurn();
     }
