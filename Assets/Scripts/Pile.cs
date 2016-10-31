@@ -15,6 +15,13 @@ public class Pile : MonoBehaviour {
         Shuffle();
     }
 
+    public static void RestockPile() {
+        foreach(CardController controller in stock) {
+            instance.pile.Add(controller);
+        }
+        stock.Clear();
+    }
+
     public void Shuffle() {
         CardController temp;
         int randomNum;

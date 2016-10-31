@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour {
             Pile.PullCard(7);
             CurrentPlayer.isFirstTurn = false;
         }
+
+        CurrentPlayer.HandGameObject.SetActive(true);
     }
 
     public static void createContinueUI() {
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public static void EndTurn() {
+        CurrentPlayer.HandGameObject.SetActive(false);
         createContinueUI();
     }
 

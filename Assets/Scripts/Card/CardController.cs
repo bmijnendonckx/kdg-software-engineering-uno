@@ -12,7 +12,7 @@ public abstract class CardController : ScriptableObject {
 
         i.gameObject.GetComponent<Image>().sprite = model.cardFace;
 
-        i.transform.SetParent(GameObject.FindGameObjectWithTag("Pile").transform);
+        i.transform.SetParent(GameManager.CurrentPlayer.HandGameObject.transform);
         i.controller = this;
         return i;
     }

@@ -29,6 +29,12 @@ public class CurrentCard:MonoBehaviour {
 
     public void Awake() {
         instance = this;
+
+        while(Pile.instance.pile[0].model.color == "wild") {
+            Pile.RestockPile();
+            Pile.instance.Shuffle();
+        }
+
         setCurrentCard(Pile.instance.pile[0].CreateGameobject().gameObject);
     }
 
