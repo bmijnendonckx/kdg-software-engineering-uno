@@ -11,6 +11,7 @@ TagManager:
   - screen
   - Background
   - PlayerTextBar
+  - ColorSelect
   layers:
   - Default
   - TransparentFX
