@@ -55,7 +55,7 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
             RaycastResult rr = eventData.pointerCurrentRaycast;
             //error when dragging outside of the screen, if statement
-            if(rr.gameObject.tag == "Card") {
+            if(rr.isValid && rr.gameObject.tag == "Card") {
                 siblingIndex = rr.gameObject.transform.GetSiblingIndex();
                 placeholder.transform.SetSiblingIndex(siblingIndex);
             }
@@ -83,10 +83,9 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if(IsDraggable) {
             Destroy(placeholder);
             RaycastResult rr = eventData.pointerCurrentRaycast;
-            if(rr.gameObject.tag == "CurrentCard") {
+            if(rr.isValid && rr.gameObject.tag == "CurrentCard" && controller.CanBePlayed()) {
                 CurrentCard.setCurrentCard(gameObject);
-                //After a card was played end the turn
-                GameManager.EndTurn();
+                controller.OnPlay();
             } else
             ReturnCard();
         }

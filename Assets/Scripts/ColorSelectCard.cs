@@ -9,7 +9,7 @@ public class ColorSelectCard :CardController {
 
     public override void OnPlay()
     {
-        base.OnPlay();
+
     }
 
 }
