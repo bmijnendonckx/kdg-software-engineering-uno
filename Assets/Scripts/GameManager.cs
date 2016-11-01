@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     static int playerIndex = 0;
     static GameObject continueUI;
     static GameManager instance;
+    static CardController controller;
 
     public static int PlayerIndex {
         get {return playerIndex;}
@@ -34,6 +35,11 @@ public class GameManager : MonoBehaviour {
 
     public void onPileClick() {
         Pile.PullCard();
+
+        //if (CurrentCard.Color != controller.model.color)
+        //{
+        //    EndTurn();
+        //}
     }
 
     public static void StartGame() {

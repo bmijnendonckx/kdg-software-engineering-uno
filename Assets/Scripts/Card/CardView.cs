@@ -83,7 +83,7 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if(IsDraggable) {
             Destroy(placeholder);
             RaycastResult rr = eventData.pointerCurrentRaycast;
-            if(rr.gameObject.tag == "CurrentCard") {
+            if(rr.gameObject.tag == "CurrentCard" && CurrentCard.m.color == controller.model.color || CurrentCard.m.value == controller.model.value) {
                 CurrentCard.setCurrentCard(gameObject);
                 //After a card was played end the turn
                 GameManager.EndTurn();
