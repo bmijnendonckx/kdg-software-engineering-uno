@@ -10,8 +10,13 @@ public class ColorSelectCard :CardController {
 
     public override void OnPlay()
     {
+        GameObject ColorChangeMenu;
+        ColorChangeMenu = Resources.Load<GameObject>("ColorSelectMenu");
+        ColorChangeMenu = Instantiate<GameObject>(ColorChangeMenu);
+        ColorChangeMenu.transform.SetParent(GameObject.FindGameObjectWithTag("screen").transform);
+        ColorChangeMenu.transform.SetAsLastSibling();
+        ColorChangeMenu.transform.localPosition = new Vector3(0, 300, 0);
 
-        Instantiate(Resources.Load("ColorSelectMenu"));
 
     }
 

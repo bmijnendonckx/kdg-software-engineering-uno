@@ -94,4 +94,5 @@ public class CurrentCard:MonoBehaviour {
     public static string currentCard() {
         return "Color: " + m.color + ", value: " + m.value;
     }
+
 }
