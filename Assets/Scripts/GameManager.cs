@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour {
         continueUI.transform.SetParent(Pile.instance.transform);
         continueUI.transform.SetAsLastSibling();
         continueUI.transform.localPosition = new Vector3(0, 300, 0);
+        continueUI.GetComponentInChildren<Text>().text = "END OF PLAYER " + (PlayerIndex+1) + "'S TURN";
         continueUI.GetComponentInChildren<Button>().onClick.AddListener(OnContinueUIClick);
     }
 
