@@ -27,8 +27,15 @@ public class CurrentCard:MonoBehaviour {
         GameObject.FindGameObjectWithTag("Background").GetComponent<Image>().color = getColor(Color);
     }
 
-    public void Awake() {
+    public void Start() {
         instance = this;
+
+        while(Pile.instance.pile[0].model.color == "wild") {
+            Pile.RestockPile();
+            Pile.instance.Shuffle();
+        }
+
+        setCurrentCard(Pile.instance.pile[0].CreateGameobject().gameObject);
     }
 
     public static Sprite CardFace {

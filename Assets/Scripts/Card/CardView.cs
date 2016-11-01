@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
     public Sprite cardBack;
     public CardController controller;
+    Transform previousParent;
+    GameObject placeholder;
+    int siblingIndex;
 
     public void Awake() {
         IsDraggable = false;
@@ -49,12 +52,15 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnDrag(PointerEventData eventData) {
         if(IsDraggable) {
             this.transform.position = eventData.position;
+
+            RaycastResult rr = eventData.pointerCurrentRaycast;
+            //error when dragging outside of the screen, if statement
+            if(rr.gameObject.tag == "Card") {
+                siblingIndex = rr.gameObject.transform.GetSiblingIndex();
+                placeholder.transform.SetSiblingIndex(siblingIndex);
+            }
         }
     }
-
-    Transform previousParent;
-    GameObject placeholder;
-    int siblingIndex;
 
     public void OnBeginDrag(PointerEventData eventData) {
         GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -77,10 +83,10 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if(IsDraggable) {
             Destroy(placeholder);
             RaycastResult rr = eventData.pointerCurrentRaycast;
-            if(rr.gameObject.tag == "CurrentCard") {
+            if(rr.gameObject.tag == "CurrentCard" && CurrentCard.m.color == controller.model.color || CurrentCard.m.value == controller.model.value) {
                 CurrentCard.setCurrentCard(gameObject);
-                //Debug.Log(CurrentCard.currentCard());
-                GameObject.FindGameObjectWithTag("screen").GetComponent<GameManager>().EndTurn();
+                //After a card was played end the turn
+                GameManager.EndTurn();
             } else
             ReturnCard();
         }

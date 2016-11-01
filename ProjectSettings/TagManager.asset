@@ -10,6 +10,7 @@ TagManager:
   - Card
   - screen
   - Background
+  - PlayerTextBar
   layers:
   - Default
   - TransparentFX
