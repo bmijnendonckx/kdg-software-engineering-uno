@@ -27,7 +27,7 @@ public class CurrentCard:MonoBehaviour {
         GameObject.FindGameObjectWithTag("Background").GetComponent<Image>().color = getColor(Color);
     }
 
-    public void Awake() {
+    public void Start() {
         instance = this;
 
         while(Pile.instance.pile[0].model.color == "wild") {

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void Awake() {
+    public void Start() {
         instance = this;     
         for(int i = 0; i < players.Length; i++) {
             players[i] = new Player();
