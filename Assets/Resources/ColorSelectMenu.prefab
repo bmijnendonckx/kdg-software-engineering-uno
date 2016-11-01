@@ -23,7 +23,7 @@ GameObject:
   - 114: {fileID: 114000013228568752}
   - 114: {fileID: 114000010610231906}
   m_Layer: 5
-  m_Name: Green
+  m_Name: green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ GameObject:
   - 114: {fileID: 114000011598706478}
   - 114: {fileID: 114000011484489198}
   m_Layer: 5
-  m_Name: Blue
+  m_Name: blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

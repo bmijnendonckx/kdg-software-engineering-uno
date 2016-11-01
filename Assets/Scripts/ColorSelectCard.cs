@@ -17,7 +17,7 @@ public class ColorSelectCard :CardController {
         ColorChangeMenu.transform.SetAsLastSibling();
         ColorChangeMenu.transform.localPosition = new Vector3(0, 300, 0);
 
-
+        //ColorChangeMenu.transform.Find("red").GetComponent<Button>().onClick.AddListener();
     }
 
 }
