@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 
 public abstract class CardController : ScriptableObject {
+    [SerializeField]
     private CardModel model;
 
     public CardModel Model {
