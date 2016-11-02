@@ -3,8 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Cards/NewColorSelectCard", menuName = "ColorSelectCard")]
-public class ColorSelectCard :CardController {
-    public override bool CanBePlayed() {
+public class ColorSelectCard : CardController
+{
+    public override bool CanBePlayed()
+    {
         return true;
     }
 
@@ -17,37 +19,15 @@ public class ColorSelectCard :CardController {
         ColorChangeMenu.transform.SetAsLastSibling();
         ColorChangeMenu.transform.localPosition = new Vector3(0, 300, 0);
 
-        ColorChangeMenu.transform.Find("red").GetComponent<Button>().onClick.AddListener(ChangeToRed); //Can't give a parameter in an addlisterer. Need to find a better solution
-        ColorChangeMenu.transform.Find("blue").GetComponent<Button>().onClick.AddListener(ChangeToBlue);
-        ColorChangeMenu.transform.Find("green").GetComponent<Button>().onClick.AddListener(ChangeToGreen);
-        ColorChangeMenu.transform.Find("Yellow").GetComponent<Button>().onClick.AddListener(ChangeToYellow);
+        ColorChangeMenu.transform.Find("red").GetComponent<Button>().onClick.AddListener(delegate { ChangeColor("red"); }); //Can't give a parameter in an addlisterer. Need to find a better solution
+        ColorChangeMenu.transform.Find("blue").GetComponent<Button>().onClick.AddListener(delegate { ChangeColor("blue"); });
+        ColorChangeMenu.transform.Find("green").GetComponent<Button>().onClick.AddListener(delegate { ChangeColor("green"); });
+        ColorChangeMenu.transform.Find("Yellow").GetComponent<Button>().onClick.AddListener(delegate { ChangeColor("yellow"); });
     }
 
-    public static void ChangeToRed()
+    public void ChangeColor(string NewColor)
     {
-        CurrentCard.Color = "red";
-        Debug.Log(CurrentCard.Color);
-        GameManager.EndTurn();
-        Destroy(GameObject.FindGameObjectWithTag("ColorSelect"));
- 
-    }
-    public static void ChangeToBlue()
-    {
-        CurrentCard.Color = "blue";
-        Debug.Log(CurrentCard.Color);
-        GameManager.EndTurn();
-        Destroy(GameObject.FindGameObjectWithTag("ColorSelect"));
-    }
-    public static void ChangeToGreen()
-    {
-        CurrentCard.Color = "green";
-        Debug.Log(CurrentCard.Color);
-        GameManager.EndTurn();
-        Destroy(GameObject.FindGameObjectWithTag("ColorSelect"));
-    }
-    public static void ChangeToYellow()
-    {
-        CurrentCard.Color = "yellow";
+        CurrentCard.Color = NewColor;
         Debug.Log(CurrentCard.Color);
         GameManager.EndTurn();
         Destroy(GameObject.FindGameObjectWithTag("ColorSelect"));
