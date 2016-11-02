@@ -46,12 +46,11 @@ public class Pile : MonoBehaviour {
             PullCard();
         }
     }
-    public static void ForcePullCard(int cards)
-    {
-        for (int i = 0; i < cards; i++)
-        {
+
+    public static void ForcePullCard(int cards) {
+        for (int i = 0; i < cards; i++) {
             GameManager.NextPlayer.hand.Add(instance.pile[0].CreateGameobject());
             instance.pile.RemoveAt(0);
         }
     }
-    }
+}

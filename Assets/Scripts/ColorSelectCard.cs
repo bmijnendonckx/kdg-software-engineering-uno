@@ -3,17 +3,14 @@ using System.Collections;
 using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Cards/NewColorSelectCard", menuName = "ColorSelectCard")]
-public class ColorSelectCard : CardController
-{
+public class ColorSelectCard : CardController {
     GameObject ColorChangeMenu;
 
-    public override bool CanBePlayed()
-    {
+    public override bool CanBePlayed() {
         return true;
     }
 
-    public override void OnPlay()
-    {
+    public override void OnPlay() {
         ColorChangeMenu = Resources.Load<GameObject>("ColorSelectMenu");
         ColorChangeMenu = Instantiate<GameObject>(ColorChangeMenu);
         ColorChangeMenu.transform.SetParent(GameObject.FindGameObjectWithTag("screen").transform);
@@ -26,11 +23,9 @@ public class ColorSelectCard : CardController
         ColorChangeMenu.transform.Find("Yellow").GetComponent<Button>().onClick.AddListener(delegate { ChangeColor("yellow"); });
     }
 
-    public void ChangeColor(string NewColor)
-    {
+    public void ChangeColor(string NewColor) {
         CurrentCard.Color = NewColor;
         GameManager.EndTurn();
         Destroy(ColorChangeMenu);
     }
-
 }

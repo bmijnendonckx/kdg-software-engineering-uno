@@ -260,6 +260,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f13c9b0d628cc14192dcedf0b3b7b34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  red: {r: 0, g: 0, b: 0, a: 0}
+  yellow: {r: 0, g: 0, b: 0, a: 0}
+  blue: {r: 0, g: 0, b: 0, a: 0}
+  green: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &352877072
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +845,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2194158b6c2fa644689c23eccf445c4c, type: 2}
   - {fileID: 11400000, guid: bf39a8eb2ae1bdb498cbbc2d579e5d17, type: 2}
   - {fileID: 11400000, guid: 05084afb2ee018344a8c49b52b86d0cd, type: 2}
-  - {fileID: 11400000, guid: 0343d91cc5f5ae64ba6affc1993e34fa, type: 2}
+  - {fileID: 11400000, guid: 4b88dbf562034ba488eaa3f398541eba, type: 2}
   - {fileID: 11400000, guid: 77bd086c0e3e8a346b7d1eee2d7a58fd, type: 2}
   - {fileID: 11400000, guid: f2de7cfc16bb44e4bb605a8038e812e5, type: 2}
   - {fileID: 11400000, guid: 574115fdfe6fa4f4da5120e74a99ee2d, type: 2}
@@ -877,7 +881,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da12f70a593b69b47bdca8fa2875cab6, type: 2}
   - {fileID: 11400000, guid: bf39a8eb2ae1bdb498cbbc2d579e5d17, type: 2}
   - {fileID: 11400000, guid: 05084afb2ee018344a8c49b52b86d0cd, type: 2}
-  - {fileID: 11400000, guid: 0343d91cc5f5ae64ba6affc1993e34fa, type: 2}
+  - {fileID: 11400000, guid: 4b88dbf562034ba488eaa3f398541eba, type: 2}
   - {fileID: 11400000, guid: bc668c2ee6fa6684d97e06194de5a1ab, type: 2}
   - {fileID: 11400000, guid: 97640a7f7e2a58e48bc50c7408dac339, type: 2}
   - {fileID: 11400000, guid: 2aa33180c2201ff4fabb67f80162ca3f, type: 2}
@@ -905,9 +909,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8efd985f1ba936144bd9b4b0d0a19ed3, type: 2}
   - {fileID: 11400000, guid: e8acfb9f491814d49a404d0afb4811b9, type: 2}
   - {fileID: 11400000, guid: 6c965f930ff62d043b50da04ad2e4517, type: 2}
-  - {fileID: 11400000, guid: 0343d91cc5f5ae64ba6affc1993e34fa, type: 2}
+  - {fileID: 11400000, guid: 4b88dbf562034ba488eaa3f398541eba, type: 2}
   - {fileID: 11400000, guid: 6c965f930ff62d043b50da04ad2e4517, type: 2}
-  - {fileID: 11400000, guid: 0343d91cc5f5ae64ba6affc1993e34fa, type: 2}
+  - {fileID: 11400000, guid: 4b88dbf562034ba488eaa3f398541eba, type: 2}
 --- !u!114 &1820872925
 MonoBehaviour:
   m_ObjectHideFlags: 0
