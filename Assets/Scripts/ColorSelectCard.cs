@@ -30,7 +30,7 @@ public class ColorSelectCard : CardController
     {
         CurrentCard.Color = NewColor;
         GameManager.EndTurn();
-        Destroy(GameObject.FindGameObjectWithTag("ColorSelect"));
+        Destroy(ColorChangeMenu);
     }
 
 }

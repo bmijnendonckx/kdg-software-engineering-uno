@@ -20,6 +20,21 @@ public class GameManager : MonoBehaviour {
             return players[PlayerIndex];
         }
     }
+    public static Player NextPlayer
+    {
+        get
+        {
+            //if (Direction)
+            //{
+            //    return players[playerIndex + 1];
+            //}
+            //else
+            //{
+            //    return players[playerIndex - 1];
+            //}
+            return players[playerIndex + 1];
+        }
+    }
 
     public void Start() {
         instance = this;     
