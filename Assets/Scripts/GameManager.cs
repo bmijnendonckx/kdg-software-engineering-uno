@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
     static Player[] players = new Player[2];
     static int playerIndex = 0;
     static GameObject continueUI;
+    public Color red, yellow, blue, green;
     static GameManager instance;
 
     public static int PlayerIndex {
@@ -85,5 +86,9 @@ public class GameManager : MonoBehaviour {
     public static void ToggleNextPlayer() {
         PlayerIndex++;
         BeginTurn();
+    }
+    public static void ChangeColor(string NewColor)
+    {
+        
     }
 }
