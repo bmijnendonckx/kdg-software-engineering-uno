@@ -48,8 +48,9 @@ public class Pile : MonoBehaviour {
     }
 
     public static void ForcePullCard(int cards) {
+        Debug.Log(GameManager.NextPlayer);
         for (int i = 0; i < cards; i++) {
-            GameManager.NextPlayer.hand.Add(instance.pile[0].CreateGameobject());
+            GameManager.NextPlayer.hand.Add(instance.pile[0].DrawOpponentCard());
             instance.pile.RemoveAt(0);
         }
     }

@@ -27,5 +27,15 @@ public abstract class CardController : ScriptableObject {
         i.transform.SetParent(GameManager.CurrentPlayer.HandGameObject.transform);
         i.controller = this;
         return i;
-    }    
+    }
+    public CardView DrawOpponentCard()
+    {
+        CardView i = Instantiate(Resources.Load<CardView>("Card"));
+
+        i.gameObject.GetComponent<Image>().sprite = Model.cardFace;
+
+        i.transform.SetParent(GameManager.NextPlayer.HandGameObject.transform);
+        i.controller = this;
+        return i;
+    }
 }

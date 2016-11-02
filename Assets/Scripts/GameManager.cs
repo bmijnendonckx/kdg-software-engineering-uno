@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour {
             //{
             //    return players[playerIndex - 1];
             //}
-            return players[playerIndex + 1];
+            
+            return players[((PlayerIndex + 1) % players.Length)];
         }
     }
 
@@ -102,8 +103,5 @@ public class GameManager : MonoBehaviour {
         PlayerIndex++;
         BeginTurn();
     }
-    public static void ChangeColor(string NewColor)
-    {
-        
-    }
+
 }
