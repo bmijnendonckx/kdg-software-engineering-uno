@@ -5,6 +5,13 @@ using System.Collections;
 public class ChangeDirectionCard : ColoredCard {
     public override void OnPlay()
     {
-        base.OnPlay();
+        if (GameManager.PlayerIndex < 1)
+        {
+            Model.value = "block";
+        }
+        else
+        {
+            GameManager.ToggleNextPlayer(false);
+        }
     }
 }

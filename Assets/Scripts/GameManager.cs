@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour {
     static int playerIndex = 0;
     static GameObject continueUI;
     static GameManager instance;
-    static CardController controller;
 
     public static int PlayerIndex {
         get {return playerIndex;}
@@ -35,11 +34,6 @@ public class GameManager : MonoBehaviour {
 
     public void onPileClick() {
         Pile.PullCard();
-
-        //if (CurrentCard.Color != controller.model.color)
-        //{
-        //    EndTurn();
-        //}
     }
 
     public static void StartGame() {
@@ -74,6 +68,7 @@ public class GameManager : MonoBehaviour {
         continueUI.transform.SetParent(Pile.instance.transform);
         continueUI.transform.SetAsLastSibling();
         continueUI.transform.localPosition = new Vector3(0, 300, 0);
+        continueUI.GetComponentInChildren<Text>().text = "END OF PLAYER " + (PlayerIndex+1) + "'S TURN";
         continueUI.GetComponentInChildren<Button>().onClick.AddListener(OnContinueUIClick);
     }
 
@@ -84,11 +79,17 @@ public class GameManager : MonoBehaviour {
 
     public static void OnContinueUIClick() {
         Destroy(continueUI);
-        ToggleNextPlayer();
+        ToggleNextPlayer(true);
     }
 
-    public static void ToggleNextPlayer() {
-        PlayerIndex++;
+    public static void ToggleNextPlayer(bool nextPlayer) {
+        if (nextPlayer == true)
+        { PlayerIndex++;
+        }
+        if (nextPlayer == false)
+        {
+            PlayerIndex--;
+        }
         BeginTurn();
     }
 }

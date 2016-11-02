@@ -6,6 +6,7 @@ public class CurrentCard:MonoBehaviour {
     public static CardModel m = new CardModel();
     private static CurrentCard instance;
     public Color red, yellow, blue, green;
+    private static int plusStreak;
 
     public Color getColor (string c) {
         switch(c) {
@@ -20,22 +21,6 @@ public class CurrentCard:MonoBehaviour {
             default:
                 return new Color(0, 0, 0);
         }
-    }
-
-    public void onChangeCard() {
-        GetComponent<Image>().sprite = CardFace;
-        GameObject.FindGameObjectWithTag("Background").GetComponent<Image>().color = getColor(Color);
-    }
-
-    public void Start() {
-        instance = this;
-
-        while(Pile.instance.pile[0].model.color == "wild") {
-            Pile.RestockPile();
-            Pile.instance.Shuffle();
-        }
-
-        setCurrentCard(Pile.instance.pile[0].CreateGameobject().gameObject);
     }
 
     public static Sprite CardFace {
@@ -65,10 +50,36 @@ public class CurrentCard:MonoBehaviour {
         }
     }
 
+    public static int PlusStreak {
+        get {
+            return plusStreak;
+        }
+
+        set {
+            plusStreak = value;
+        }
+    }
+
+    public void onChangeCard() {
+        GetComponent<Image>().sprite = CardFace;
+        GameObject.FindGameObjectWithTag("Background").GetComponent<Image>().color = getColor(Color);
+    }
+
+    public void Start() {
+        instance = this;
+
+        while(Pile.instance.pile[0].Model.color == "wild") {
+            Pile.RestockPile();
+            Pile.instance.Shuffle();
+        }
+
+        setCurrentCard(Pile.instance.pile[0].CreateGameobject().gameObject);
+    }
+
     public static void setCurrentCard(GameObject go) {
         CardView view = go.GetComponent<CardView>();
         CardController controller = view.controller;
-        CardModel model = controller.model;
+        CardModel model = controller.Model;
 
         Color = model.color;
         Value = model.value;
