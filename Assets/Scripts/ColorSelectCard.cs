@@ -27,7 +27,7 @@ public class ColorSelectCard :CardController {
     {
         CurrentCard.Color = "red";
         Debug.Log(CurrentCard.Color);
-        GameManager.createContinueUI();
+        GameManager.EndTurn();
         Destroy(GameObject.FindGameObjectWithTag("ColorSelect"));
  
     }
@@ -35,21 +35,21 @@ public class ColorSelectCard :CardController {
     {
         CurrentCard.Color = "blue";
         Debug.Log(CurrentCard.Color);
-        GameManager.createContinueUI();
+        GameManager.EndTurn();
         Destroy(GameObject.FindGameObjectWithTag("ColorSelect"));
     }
     public static void ChangeToGreen()
     {
         CurrentCard.Color = "green";
         Debug.Log(CurrentCard.Color);
-        GameManager.createContinueUI();
+        GameManager.EndTurn();
         Destroy(GameObject.FindGameObjectWithTag("ColorSelect"));
     }
     public static void ChangeToYellow()
     {
         CurrentCard.Color = "yellow";
         Debug.Log(CurrentCard.Color);
-        GameManager.createContinueUI();
+        GameManager.EndTurn();
         Destroy(GameObject.FindGameObjectWithTag("ColorSelect"));
     }
 
