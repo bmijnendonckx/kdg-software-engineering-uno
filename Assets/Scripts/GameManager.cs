@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour {
     static GameObject continueUI;
     static GameManager instance;
 
+
+
+
+
     public static int PlayerIndex {
         get {return playerIndex;}
         set {playerIndex = (value + players.Length) % players.Length;
@@ -33,7 +37,18 @@ public class GameManager : MonoBehaviour {
     }
 
     public void onPileClick() {
-        Pile.PullCard();
+
+       
+        if(Pile.instance.pile[0].Model.color != CurrentCard.Color)
+        {
+            Pile.PullCard();
+            GameManager.EndTurn();
+            
+        }
+        else
+        {
+            Pile.PullCard();
+        }
     }
 
     public static void StartGame() {

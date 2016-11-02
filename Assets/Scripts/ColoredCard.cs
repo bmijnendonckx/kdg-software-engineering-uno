@@ -14,5 +14,6 @@ public class ColoredCard : CardController {
 
     public override bool CanBePlayed() {
         return (Model.color == CurrentCard.Color || Model.value == CurrentCard.Value);
+    
     }
 }

@@ -38,13 +38,14 @@ public class Pile : MonoBehaviour {
         //Card 0 is the top card of the pile
         GameManager.CurrentPlayer.hand.Add(instance.pile[0].CreateGameobject());
         instance.pile.RemoveAt(0); //remove from pile add to hand from the currently playing player
+        
     }
 
     public static void PullCard(int amount, int who)
     {
         who = GameManager.PlayerIndex++;
 
-        PullCard(2);
+        PullCard(amount);
 
     }
 
