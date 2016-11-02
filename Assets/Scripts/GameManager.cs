@@ -90,6 +90,9 @@ public class GameManager : MonoBehaviour {
     }
 
     public static void EndTurn() {
+        if(CurrentCard.IsFirstCard)
+            return;
+
         CurrentPlayer.HandGameObject.SetActive(false);
         createContinueUI();
     }

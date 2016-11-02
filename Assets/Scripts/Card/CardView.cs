@@ -85,7 +85,6 @@ public class CardView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             RaycastResult rr = eventData.pointerCurrentRaycast;
             if(rr.isValid && rr.gameObject.tag == "CurrentCard" && controller.CanBePlayed()) {
                 CurrentCard.setCurrentCard(gameObject);
-                controller.OnPlay();
             } else
             ReturnCard();
         }

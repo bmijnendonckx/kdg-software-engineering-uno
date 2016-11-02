@@ -70,12 +70,17 @@ public class CurrentCard:MonoBehaviour {
         }
     }
 
+    public static bool IsFirstCard {
+        get; set;
+    }
+
     public void onChangeCard() {
         GetComponent<Image>().sprite = CardFace;
         GameObject.FindGameObjectWithTag("Background").GetComponent<Image>().color = getColor(Color);
     }
 
     public void Start() {
+        IsFirstCard = true;
         instance = this;
 
         while(Pile.instance.pile[0].Model.color == "wild") {
@@ -83,20 +88,31 @@ public class CurrentCard:MonoBehaviour {
             Pile.instance.Shuffle();
         }
 
-        setCurrentCard(Pile.instance.pile[0].CreateGameobject().gameObject);
+        GameManager.PlayerIndex--;
+        setCurrentCard(Pile.instance.pile[0], true);
+        Pile.instance.pile.RemoveAt(0);
+        IsFirstCard = false;
+        GameManager.PlayerIndex++;
     }
 
-    public static void setCurrentCard(GameObject go) {
-        CardView view = go.GetComponent<CardView>();
-        CardController controller = view.controller;
-        CardModel model = controller.Model;
+    public static void setCurrentCard(CardController c, bool firstCard = false) {
+        CardModel model = c.Model;
 
         Color = model.color;
         Value = model.value;
         CardFace = model.cardFace;
 
+        Pile.stock.Add(c);
+
+        if(!firstCard || c is ColoredCard)
+            c.OnPlay();
+    }
+
+    public static void setCurrentCard(GameObject go) {
+        CardView view = go.GetComponent<CardView>();
+        setCurrentCard(view.controller);
         GameManager.CurrentPlayer.hand.Remove(view);
-        Pile.stock.Add(controller);
+        
         Destroy(go);
     }
 
