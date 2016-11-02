@@ -6,7 +6,8 @@ public class CurrentCard:MonoBehaviour {
     public static CardModel m = new CardModel();
     private static CurrentCard instance;
     public Color red, yellow, blue, green;
-    private static int plusStreak;
+    private static int plusFourStreak;
+    private static int plusTwoStreak;
 
     public Color getColor (string c) {
         switch(c) {
@@ -26,21 +27,21 @@ public class CurrentCard:MonoBehaviour {
     public static Sprite CardFace {
         set {
             m.cardFace = value;
+            instance.onChangeCard();
         }
         get {
             return m.cardFace;
         }
     }
-
     public static string Color {
         set {
             m.color = value;
+            instance.onChangeCard();
         }
         get {
             return m.color;
         }
     }
-
     public static string Value {
         set {
             m.value = value;
@@ -50,13 +51,22 @@ public class CurrentCard:MonoBehaviour {
         }
     }
 
-    public static int PlusStreak {
+    public static int PlusTwoStreak {
         get {
-            return plusStreak;
+            return plusTwoStreak;
         }
 
         set {
-            plusStreak = value;
+            plusTwoStreak = value;
+        }
+    }
+    public static int PlusFourStreak {
+        get {
+            return plusFourStreak;
+        }
+
+        set {
+            plusFourStreak = value;
         }
     }
 
@@ -88,7 +98,6 @@ public class CurrentCard:MonoBehaviour {
         GameManager.CurrentPlayer.hand.Remove(view);
         Pile.stock.Add(controller);
         Destroy(go);
-        instance.onChangeCard();
     }
 
     public static string currentCard() {
