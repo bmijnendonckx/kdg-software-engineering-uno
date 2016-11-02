@@ -5,6 +5,9 @@ using System.Collections;
 public class PlusTwoCard : ColoredCard {
     public override void OnPlay() {
 
+        Pile.PullCard(2, 1);
+        GameManager.EndTurn();
+
     }
 
     public override bool CanBePlayed()

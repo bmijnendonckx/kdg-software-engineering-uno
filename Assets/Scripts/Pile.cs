@@ -40,6 +40,14 @@ public class Pile : MonoBehaviour {
         instance.pile.RemoveAt(0); //remove from pile add to hand from the currently playing player
     }
 
+    public static void PullCard(int amount, int who)
+    {
+        who = GameManager.PlayerIndex++;
+
+        PullCard(2);
+
+    }
+
     //Pull Cards equal to passed amount
     public static void PullCard(int cards) {
         for(int i = 0; i < cards; i++) {
