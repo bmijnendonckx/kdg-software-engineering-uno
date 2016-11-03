@@ -80,40 +80,39 @@ public class GameManager : MonoBehaviour {
         CurrentPlayer.HandGameObject.SetActive(true);
     }
 
-    public static void createContinueUI() {
+    public static void createContinueUI(bool EndGame) {
         continueUI = Resources.Load<GameObject>("Press Continue");
         continueUI = Instantiate<GameObject>(continueUI);
         continueUI.transform.SetParent(Pile.instance.transform);
         continueUI.transform.SetAsLastSibling();
         continueUI.transform.localPosition = new Vector3(0, 300, 0);
-        continueUI.GetComponentInChildren<Text>().text = "END OF PLAYER " + (PlayerIndex+1) + "'S TURN";
-        continueUI.GetComponentInChildren<Button>().onClick.AddListener(OnContinueUIClick);
+        if (EndGame)
+        {
+            continueUI.GetComponentInChildren<Text>().text = "player " + (PlayerIndex + 1) + " wins. Play Again?";
+            continueUI.GetComponentInChildren<Button>().onClick.AddListener(StartNewGame);
+            //continueUI.GetComponent<Button>().GetComponentInChildren<Text>().text = "New Game";
+        }
+        else
+        {
+            continueUI.GetComponentInChildren<Text>().text = "END OF PLAYER " + (PlayerIndex + 1) + "'S TURN";
+            continueUI.GetComponentInChildren<Button>().onClick.AddListener(OnContinueUIClick);
+        }
     }
 
     public static void CheckVictoryCondition()
     {
         if(CurrentPlayer.hand.Count == 0)
         {
-            createVictoryScreen();
+            createContinueUI(true);
         }
     }
-    public static void createVictoryScreen() {
-        continueUI = Resources.Load<GameObject>("Press Continue");
-        continueUI = Instantiate<GameObject>(continueUI);
-        continueUI.transform.SetParent(Pile.instance.transform);
-        continueUI.transform.SetAsLastSibling();
-        continueUI.transform.localPosition = new Vector3(0, 300, 0);
-        continueUI.GetComponentInChildren<Text>().text = "player " + (PlayerIndex+1) + " wins";
-        continueUI.GetComponentInChildren<Button>().onClick.AddListener(StartNewGame);
-        //continueUI.GetComponent<Button>().GetComponentInChildren<Text>().text = "Play Again?";
 
-    }
     public static void EndTurn() {
         if(CurrentCard.IsFirstCard)
             return;
 
         CurrentPlayer.HandGameObject.SetActive(false);
-        createContinueUI();
+        createContinueUI(false);
     }
 
     public static void OnContinueUIClick() {
