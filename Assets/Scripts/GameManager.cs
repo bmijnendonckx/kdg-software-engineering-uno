@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     static GameObject continueUI;
     public Color red, yellow, blue, green;
     static GameManager instance;
+    static bool ifAlreadyPulled = true;
 
     public static int PlayerIndex {
         get {return playerIndex;}
@@ -52,19 +53,23 @@ public class GameManager : MonoBehaviour {
     public void onPileClick() {
         string modelColor = Pile.instance.pile[0].Model.color;
 
-        if (modelColor == "wild" || modelColor == CurrentCard.Color) 
+        if (ifAlreadyPulled == true)
         {
-            Pile.PullCard();
-          
-        }
+            if (modelColor == "wild" || modelColor == CurrentCard.Color)
+            {
+                Pile.PullCard();
+                ifAlreadyPulled = false;
+            }
 
-        else
-        {
-            Pile.PullCard();
-            EndTurn();
+            else
+            {
+                Pile.PullCard();
+                EndTurn();
+            }
         }
-
     }
+
+
 
     public static void StartGame() {
         //First player
@@ -90,6 +95,7 @@ public class GameManager : MonoBehaviour {
         }
 
         CurrentPlayer.HandGameObject.SetActive(true);
+        ifAlreadyPulled = true;
     }
 
     public static void createContinueUI() {
