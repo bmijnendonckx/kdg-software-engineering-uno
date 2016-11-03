@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour {
     static Player[] players = new Player[2];
     static int playerIndex = 0;
     static GameObject continueUI;
+    static GameObject victoryUI;
     public Color red, yellow, blue, green;
     static GameManager instance;
 
@@ -109,7 +110,7 @@ public class GameManager : MonoBehaviour {
     {
         if(CurrentPlayer.hand.Count == 0)
         {
-            GameObject victoryUI = createUI("player " + (PlayerIndex + 1) + " wins", "restart");
+            victoryUI = createUI("player " + (PlayerIndex + 1) + " wins", "restart");
             victoryUI.GetComponentInChildren<Button>().onClick.AddListener(StartNewGame);
         }
     }
@@ -119,7 +120,7 @@ public class GameManager : MonoBehaviour {
             return;
 
         CurrentPlayer.HandGameObject.SetActive(false);
-        GameObject continueUI = createUI("END OF PLAYER " + (PlayerIndex + 1) + "'S TURN", "continue");
+        continueUI = createUI("END OF PLAYER " + (PlayerIndex + 1) + "'S TURN", "continue");
         continueUI.GetComponentInChildren<Button>().onClick.AddListener(OnContinueUIClick);
     }
 
