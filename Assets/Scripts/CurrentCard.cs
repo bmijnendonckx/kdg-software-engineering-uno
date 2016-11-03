@@ -6,7 +6,8 @@ public class CurrentCard:MonoBehaviour {
     public static CardModel m = new CardModel();
     private static CurrentCard instance;
     public Color red, yellow, blue, green;
-    private static int plusStreak;
+    private static int plusFourStreak;
+    private static int plusTwoStreak;
 
     public Color getColor (string c) {
         switch(c) {
@@ -26,21 +27,21 @@ public class CurrentCard:MonoBehaviour {
     public static Sprite CardFace {
         set {
             m.cardFace = value;
+            instance.onChangeCard();
         }
         get {
             return m.cardFace;
         }
     }
-
     public static string Color {
         set {
             m.color = value;
+            instance.onChangeCard();
         }
         get {
             return m.color;
         }
     }
-
     public static string Value {
         set {
             m.value = value;
@@ -50,14 +51,27 @@ public class CurrentCard:MonoBehaviour {
         }
     }
 
-    public static int PlusStreak {
+    public static int PlusTwoStreak {
         get {
-            return plusStreak;
+            return plusTwoStreak;
         }
 
         set {
-            plusStreak = value;
+            plusTwoStreak = value;
         }
+    }
+    public static int PlusFourStreak {
+        get {
+            return plusFourStreak;
+        }
+
+        set {
+            plusFourStreak = value;
+        }
+    }
+
+    public static bool IsFirstCard {
+        get; set;
     }
 
     public void onChangeCard() {
@@ -66,6 +80,7 @@ public class CurrentCard:MonoBehaviour {
     }
 
     public void Start() {
+        IsFirstCard = true;
         instance = this;
 
         while(Pile.instance.pile[0].Model.color == "wild") {
@@ -73,25 +88,36 @@ public class CurrentCard:MonoBehaviour {
             Pile.instance.Shuffle();
         }
 
-        setCurrentCard(Pile.instance.pile[0].CreateGameobject().gameObject);
+        GameManager.PlayerIndex--;
+        setCurrentCard(Pile.instance.pile[0], true);
+        Pile.instance.pile.RemoveAt(0);
+        IsFirstCard = false;
+        GameManager.PlayerIndex++;
     }
 
-    public static void setCurrentCard(GameObject go) {
-        CardView view = go.GetComponent<CardView>();
-        CardController controller = view.controller;
-        CardModel model = controller.Model;
+    public static void setCurrentCard(CardController c, bool firstCard = false) {
+        CardModel model = c.Model;
 
         Color = model.color;
         Value = model.value;
         CardFace = model.cardFace;
 
+        Pile.stock.Add(c);
+
+        if(!firstCard || c is ColoredCard)
+            c.OnPlay();
+    }
+
+    public static void setCurrentCard(GameObject go) {
+        CardView view = go.GetComponent<CardView>();
+        setCurrentCard(view.controller);
         GameManager.CurrentPlayer.hand.Remove(view);
-        Pile.stock.Add(controller);
+        
         Destroy(go);
-        instance.onChangeCard();
     }
 
     public static string currentCard() {
         return "Color: " + m.color + ", value: " + m.value;
     }
+
 }

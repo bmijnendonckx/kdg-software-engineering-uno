@@ -6,11 +6,8 @@ public class GameManager : MonoBehaviour {
     static Player[] players = new Player[2];
     static int playerIndex = 0;
     static GameObject continueUI;
+    public Color red, yellow, blue, green;
     static GameManager instance;
-
-
-
-
 
     public static int PlayerIndex {
         get {return playerIndex;}
@@ -21,6 +18,22 @@ public class GameManager : MonoBehaviour {
     public static Player CurrentPlayer {
         get {
             return players[PlayerIndex];
+        }
+    }
+    public static Player NextPlayer
+    {
+        get
+        {
+            //if (Direction)
+            //{
+            //    return players[playerIndex + 1];
+            //}
+            //else
+            //{
+            //    return players[playerIndex - 1];
+            //}
+            
+            return players[((PlayerIndex + 1) % players.Length)];
         }
     }
 
@@ -37,18 +50,20 @@ public class GameManager : MonoBehaviour {
     }
 
     public void onPileClick() {
+        string modelColor = Pile.instance.pile[0].Model.color;
 
-       
-        if(Pile.instance.pile[0].Model.color != CurrentCard.Color)
+        if (modelColor == "wild" || modelColor == CurrentCard.Color) 
         {
             Pile.PullCard();
-            GameManager.EndTurn();
-            
+          
         }
+
         else
         {
             Pile.PullCard();
+            EndTurn();
         }
+
     }
 
     public static void StartGame() {
@@ -88,6 +103,9 @@ public class GameManager : MonoBehaviour {
     }
 
     public static void EndTurn() {
+        if(CurrentCard.IsFirstCard)
+            return;
+
         CurrentPlayer.HandGameObject.SetActive(false);
         createContinueUI();
     }
@@ -98,13 +116,16 @@ public class GameManager : MonoBehaviour {
     }
 
     public static void ToggleNextPlayer(bool nextPlayer) {
-        if (nextPlayer == true)
-        { PlayerIndex++;
-        }
-        if (nextPlayer == false)
+       
+        if(nextPlayer ==  true)
         {
-            PlayerIndex--;
+            PlayerIndex++;
+        }
+        if(nextPlayer == false)
+        {
+            playerIndex--;
         }
         BeginTurn();
     }
+
 }
