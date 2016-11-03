@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     static Player[] players = new Player[2];
@@ -89,6 +90,24 @@ public class GameManager : MonoBehaviour {
         continueUI.GetComponentInChildren<Button>().onClick.AddListener(OnContinueUIClick);
     }
 
+    public static void CheckVictoryCondition()
+    {
+        if(CurrentPlayer.hand.Count == 0)
+        {
+            createVictoryScreen();
+        }
+    }
+    public static void createVictoryScreen() {
+        continueUI = Resources.Load<GameObject>("Press Continue");
+        continueUI = Instantiate<GameObject>(continueUI);
+        continueUI.transform.SetParent(Pile.instance.transform);
+        continueUI.transform.SetAsLastSibling();
+        continueUI.transform.localPosition = new Vector3(0, 300, 0);
+        continueUI.GetComponentInChildren<Text>().text = "player " + (PlayerIndex+1) + " wins";
+        continueUI.GetComponentInChildren<Button>().onClick.AddListener(StartNewGame);
+        //continueUI.GetComponent<Button>().GetComponentInChildren<Text>().text = "Play Again?";
+
+    }
     public static void EndTurn() {
         if(CurrentCard.IsFirstCard)
             return;
@@ -105,6 +124,11 @@ public class GameManager : MonoBehaviour {
     public static void ToggleNextPlayer() {
         PlayerIndex++;
         BeginTurn();
+    }
+
+    public static void StartNewGame()
+    {
+        SceneManager.LoadScene("Game");
     }
 
 }
