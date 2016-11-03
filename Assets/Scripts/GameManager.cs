@@ -80,30 +80,37 @@ public class GameManager : MonoBehaviour {
         CurrentPlayer.HandGameObject.SetActive(true);
     }
 
-    public static void createContinueUI(bool EndGame) {
-        continueUI = Resources.Load<GameObject>("Press Continue");
-        continueUI = Instantiate<GameObject>(continueUI);
-        continueUI.transform.SetParent(Pile.instance.transform);
-        continueUI.transform.SetAsLastSibling();
-        continueUI.transform.localPosition = new Vector3(0, 300, 0);
-        if (EndGame)
-        {
-            continueUI.GetComponentInChildren<Text>().text = "player " + (PlayerIndex + 1) + " wins. Play Again?";
-            continueUI.GetComponentInChildren<Button>().onClick.AddListener(StartNewGame);
-            //continueUI.GetComponent<Button>().GetComponentInChildren<Text>().text = "New Game";
-        }
-        else
-        {
-            continueUI.GetComponentInChildren<Text>().text = "END OF PLAYER " + (PlayerIndex + 1) + "'S TURN";
-            continueUI.GetComponentInChildren<Button>().onClick.AddListener(OnContinueUIClick);
-        }
+    public static GameObject createUI(string text, string btnText)
+    {
+        GameObject createdUI = Resources.Load<GameObject>("Press Continue");
+        createdUI = Instantiate<GameObject>(createdUI);
+        createdUI.transform.SetParent(Pile.instance.transform);
+        createdUI.transform.SetAsLastSibling();
+        createdUI.transform.localPosition = new Vector3(0, 300, 0);
+
+        /* de hierarchy opbouw
+        GAMEOBJECT
+        >   TEXT "componentInChildren t.o.v Gameobject"
+        >   BUTTON
+            >   TEXT "getChild(1) van GAMEOBJECT is Button, componentInChildren t.o.v Button"
+        */
+
+        createdUI.GetComponentInChildren<Text>().text = text;
+        createdUI.transform.GetChild(1).GetComponentInChildren<Text>().text = btnText;
+
+        return createdUI;
     }
+
+    
+ 
+    
 
     public static void CheckVictoryCondition()
     {
         if(CurrentPlayer.hand.Count == 0)
         {
-            createContinueUI(true);
+            GameObject victoryUI = createUI("player " + (PlayerIndex + 1) + " wins", "restart");
+            victoryUI.GetComponentInChildren<Button>().onClick.AddListener(StartNewGame);
         }
     }
 
@@ -112,7 +119,8 @@ public class GameManager : MonoBehaviour {
             return;
 
         CurrentPlayer.HandGameObject.SetActive(false);
-        createContinueUI(false);
+        GameObject continueUI = createUI("END OF PLAYER " + (PlayerIndex + 1) + "'S TURN", "continue");
+        continueUI.GetComponentInChildren<Button>().onClick.AddListener(OnContinueUIClick);
     }
 
     public static void OnContinueUIClick() {
