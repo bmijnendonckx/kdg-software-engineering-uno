@@ -51,25 +51,6 @@ public class CurrentCard:MonoBehaviour {
         }
     }
 
-    public static int PlusTwoStreak {
-        get {
-            return plusTwoStreak;
-        }
-
-        set {
-            plusTwoStreak = value;
-        }
-    }
-    public static int PlusFourStreak {
-        get {
-            return plusFourStreak;
-        }
-
-        set {
-            plusFourStreak = value;
-        }
-    }
-
     public static bool IsFirstCard {
         get; set;
     }

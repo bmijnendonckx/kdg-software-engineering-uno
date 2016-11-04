@@ -28,8 +28,8 @@ public abstract class CardController : ScriptableObject {
         i.controller = this;
         return i;
     }
-    public CardView DrawOpponentCard()
-    {
+
+    public CardView DrawOpponentCard() {
         CardView i = Instantiate(Resources.Load<CardView>("Card"));
 
         i.gameObject.GetComponent<Image>().sprite = Model.cardFace;

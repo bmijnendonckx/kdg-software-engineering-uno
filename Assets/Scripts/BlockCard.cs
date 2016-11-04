@@ -5,6 +5,7 @@ using System.Collections;
 public class BlockCard : ColoredCard {
     public override void OnPlay()
     {
-        
+        GameManager.ToggleNextPlayer(true);
+        GameManager.EndTurn();
     }
 }
