@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Return) && continueUI) {
             OnContinueUIClick();
         }
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
     }
 
     public void onPileClick() {
