@@ -52,30 +52,31 @@ public class GameManager : MonoBehaviour {
         StartGame();
     }
 
-    public bool doesHandHasColor(string color) {
-        bool handColor = false;
-        
-        foreach(CardView view in GameManager.CurrentPlayer.hand) {
-            if(view.controller.Model.color == color)
-                handColor = true;
-        }
 
-        return handColor;
+    public void Update() {
+        if(Input.GetKeyDown(KeyCode.P)) {
+            onPileClick();
+        }
+        if(Input.GetKeyDown(KeyCode.Return) && continueUI) {
+            OnContinueUIClick();
+        }
     }
 
     public void onPileClick() {
-        string modelColor = Pile.instance.pile[0].Model.color;
+        if (continueUI) return;
+        
+        CardController controller = Pile.instance.pile[0];
 
         if(!ifAlreadyPulled) {
-            if(modelColor == "wild" || modelColor == CurrentCard.Color && !doesHandHasColor(modelColor)) {
+            if(controller.CanBePlayed()) {
                 ifAlreadyPulled = true;
                 foreach(CardView view in GameManager.CurrentPlayer.hand) {
                     view.IsDraggable = false;
                 }
                 Pile.PullCard();
             } else {
-                Pile.PullCard();
                 EndTurn();
+                Pile.PullCard();
             }
         }
     }
@@ -135,6 +136,7 @@ public class GameManager : MonoBehaviour {
 
     public static void CheckVictoryCondition() {
         if(CurrentPlayer.hand.Count == 0) {
+            Debug.Log("victory");
             victoryUI = createUI("player " + (PlayerIndex + 1) + " wins", "restart");
             victoryUI.GetComponentInChildren<Button>().onClick.AddListener(StartNewGame);
         }
